@@ -16,7 +16,26 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+    torii: {
+      sessionServiceName: 'session',
+      providers: {
+        'github-oauth2': {
+          apiKey: '2ea030a9fbacfc7c6a63',
+          redirectUri: 'http://localhost:4200',
+          scope: 'user:email,repo'
+        }
+      }
+    },
+    contentSecurityPolicy: {
+      'default-src': "'none'",
+      'script-src': "'self'",
+      'font-src': "'self'",
+      'connect-src': "'self' https://api.github.com https://github.com",
+      'img-src': "'self'",
+      'style-src': "'self'",
+      'media-src': "'self'"
+     }
   };
 
   if (environment === 'development') {

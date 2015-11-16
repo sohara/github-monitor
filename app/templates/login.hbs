@@ -1,0 +1,9 @@
+<h3>Login</h3>
+{{#if session.isWorking}}
+  One sec while we get you signed in...
+{{else}}
+  {{error}}
+  <a href="#" {{action 'githubSignin'}}>
+    Sign In with Github
+  </a>
+{{/if}}
