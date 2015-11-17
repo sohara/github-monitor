@@ -1,1 +1,10 @@
-<h3>This is the index</h3>
+<h3>Signed in as {{currentUser.login}}</h3>
+<img src={{currentUser.avatar_url}}>
+<ul>
+ {{#each model as |repo|}}
+  <li>
+    <h4>{{repo.name}}</h4>
+    <p>{{repo.description}}</p>
+  </li>
+{{/each}}
+</ul>

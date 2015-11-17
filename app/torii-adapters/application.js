@@ -2,9 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Object.extend({
   open: function(authentication){
-    var authorizationCode = authentication.authorizationCode;
+    let authorizationCode = authentication.authorizationCode;
     console.log(authentication);
-    return new Ember.RSVP.Promise(function(resolve, reject){
       return Ember.$.ajax({
         url: 'login/oauth/access_token',
         type: 'POST',
@@ -15,31 +14,20 @@ export default Ember.Object.extend({
           'code': authorizationCode,
         }
       }).then(response => {
-          console.log(response);
-          return Ember.$.ajax({
-            url: 'https://api.github.com/user?access_token=' + response.access_token,
-            dataType: 'json',
-            // success: Ember.run.bind(null, resolve),
-            // error: Ember.run.bind(null, reject)
-          }).then(user => {
-            resolve({
-              currentUser: user
-            });
-          });
-        }).catch(error => {
-          console.log(error);
+        console.log(response);
+        Ember.$.ajaxSetup({
+          headers: {
+            "Authorization": `token ${response.access_token}`
+          }
         });
-    }.bind(this)).then(user => {
-      // The returned object is merged onto the session (basically). Here
-      // you may also want to persist the new session with cookies or via
-      // localStorage.
-      console.log("User is");
-      console.log(user);
-      return {
-        currentUser: user
-      };
-    }).catch(function(error) {
-      return(error);
-    });
+        return Ember.$.ajax({
+          url: 'https://api.github.com/user',
+          dataType: 'JSON',
+        }).then(user => {
+          return {
+            currentUser: user
+          };
+        });
+      });
   }
 });

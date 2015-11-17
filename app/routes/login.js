@@ -1,6 +1,7 @@
+import Ember from 'ember';
 
 export default Ember.Route.extend({
-actions: {
+  actions: {
     githubSignin: function(){
       let route = this;
       let controller = this.controllerFor('login');
