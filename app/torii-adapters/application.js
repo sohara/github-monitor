@@ -1,8 +1,34 @@
 import Ember from 'ember';
 
 export default Ember.Object.extend({
-  open: function(authentication){
+  fetch(authentication) {
+    return new Ember.RSVP.Promise(function (resolve, reject) {
+      let access_token = Ember.$.cookie('access_token');
+      if (!access_token) {
+        reject(false);
+        return false;
+      }
+      Ember.$.ajaxSetup({
+        headers: {
+          "Authorization": `token ${access_token}`
+        }
+      });
+      Ember.$.ajax({
+        url: 'https://api.github.com/user',
+        dataType: 'JSON',
+      }).then(user => {
+        resolve({
+          currentUser: user
+        });
+      }, error => {
+        reject(error);
+      });
+    });
+  },
+
+  open(authentication) {
     let authorizationCode = authentication.authorizationCode;
+    Ember.$.cookie('authorizationCode', authorizationCode);
     console.log(authentication);
       return Ember.$.ajax({
         url: 'login/oauth/access_token',
@@ -15,6 +41,7 @@ export default Ember.Object.extend({
         }
       }).then(response => {
         console.log(response);
+        Ember.$.cookie('access_token', response.access_token);
         Ember.$.ajaxSetup({
           headers: {
             "Authorization": `token ${response.access_token}`
