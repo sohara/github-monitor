@@ -1,0 +1,48 @@
+.container {
+  width: 900px;
+  margin: 0 auto;
+}
+#profile {
+  float: right;
+}
+
+.header h2 {
+  width: 400px;
+  float: left;
+}
+
+.header {
+  clear: both;
+}
+.header h3 { 
+  float: right;
+  text-align: right;
+} 
+.header img {
+  float: right;
+  width: 50px;
+  margin-left: 30px;
+}
+
+.right-link {
+  float: right;
+}
+
+.content { clear: both; }
+
+.content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.content li {
+  margin-bottom: 10px;
+}
+
+span.name, span.org {
+  display: block;
+}
+
+li .org {
+  color: #666;
+}

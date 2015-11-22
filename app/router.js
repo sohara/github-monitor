@@ -9,6 +9,7 @@ Router.map(function() {
   this.authenticatedRoute('index', {
     path: '/'
   });
+  this.authenticatedRoute('repos');
   this.route('login');
 });
 

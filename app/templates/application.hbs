@@ -1,3 +1,16 @@
-<h2 id="title">Github Monitor</h2>
+<div class="container">
+  <div class="header">
+    <h2 id="title">Github Monitor</h2>
+    {{#if currentUser}}
+    <div id="profile">
+      <img src={{currentUser.avatar_url}}>
+      <h3>Signed in as {{currentUser.login}}</h3>
+    </div>
+    {{/if}}
+  </div>
 
-{{outlet}}
+  <div class="content">
+    {{outlet}}
+  </div>
+
+</div>

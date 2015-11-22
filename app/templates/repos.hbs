@@ -1,0 +1,16 @@
+<div class="right-link">
+  {{link-to 'Back to PRs' 'index'}}
+</div>
+<h3>Repos</h3>
+
+<ul>
+  {{#each model as |repo|}}
+    <li>
+      <span class="name">
+        {{repo.name}}
+      </span>
+      <span class="org">{{repo.owner.login}}</span>
+    </li>
+
+  {{/each}}
+</ul>

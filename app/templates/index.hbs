@@ -1,5 +1,7 @@
-<h3>Signed in as {{currentUser.login}}</h3>
-<img src={{currentUser.avatar_url}}>
+<div class="right-link">
+  {{link-to 'Repos' 'repos'}}
+</div>
+<h3>Pull Requests</h3>
 <ul>
  {{#each model as |repo|}}
   <li>
